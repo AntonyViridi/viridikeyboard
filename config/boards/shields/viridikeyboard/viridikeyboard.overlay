@@ -1,26 +1,51 @@
-&xiao_spi {
-    status = "okay";
-    cs-gpios = <&xiao_d 9 GPIO_ACTIVE_LOW>;
-    shifter: 595@0 {
-        compatible = "zmk,gpio-595";
-        status = "okay";
-        gpio-controller;
-        spi-max-frequency = <200000>;
-        reg = <0>;
-        #gpio-cells = <2>;
-        ngpios = <8>;
+/dts-v1/;
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
     };
 };
 
-kscan0: kscan_0 {
+&kscan0 {
     compatible = "zmk,kscan-gpio-matrix";
-    diode-direction = "col2row";
-    col-gpios
-        = <&shifter 7 GPIO_ACTIVE_HIGH>
-        , <&shifter 6 GPIO_ACTIVE_HIGH>
-        , <&shifter 5 GPIO_ACTIVE_HIGH>
-        , <&shifter 4 GPIO_ACTIVE_HIGH>
-        , <&shifter 3 GPIO_ACTIVE_HIGH>
-        , <&shifter 2 GPIO_ACTIVE_HIGH>
-    ;
+    label = "KSCAN";
+    status = "okay";
+
+    /*
+     * Матрица 16 столбцов x 6 строк
+     * Замените PIN_X на реальные пины вашей платы
+     * Пример для nRF52840: PIN_0_01, PIN_0_02, PIN_1_01 и т.д.
+     */
+
+    col-gpios = <
+        &gpio0 PIN_0  GPIO_ACTIVE_HIGH   // Column 0
+        &gpio0 PIN_1  GPIO_ACTIVE_HIGH   // Column 1
+        &gpio0 PIN_2  GPIO_ACTIVE_HIGH   // Column 2
+        &gpio0 PIN_3  GPIO_ACTIVE_HIGH   // Column 3
+        &gpio0 PIN_4  GPIO_ACTIVE_HIGH   // Column 4
+        &gpio0 PIN_5  GPIO_ACTIVE_HIGH   // Column 5
+        &gpio0 PIN_6  GPIO_ACTIVE_HIGH   // Column 6
+        &gpio0 PIN_7  GPIO_ACTIVE_HIGH   // Column 7
+        &gpio0 PIN_8  GPIO_ACTIVE_HIGH   // Column 8
+        &gpio0 PIN_9  GPIO_ACTIVE_HIGH   // Column 9
+        &gpio1 PIN_0  GPIO_ACTIVE_HIGH   // Column 10
+        &gpio1 PIN_1  GPIO_ACTIVE_HIGH   // Column 11
+        &gpio1 PIN_2  GPIO_ACTIVE_HIGH   // Column 12
+        &gpio1 PIN_3  GPIO_ACTIVE_HIGH   // Column 13
+        &gpio1 PIN_4  GPIO_ACTIVE_HIGH   // Column 14
+        &gpio1 PIN_5  GPIO_ACTIVE_HIGH   // Column 15
+    >;
+
+    row-gpios = <
+        &gpio1 PIN_6  GPIO_ACTIVE_LOW    // Row 0
+        &gpio1 PIN_7  GPIO_ACTIVE_LOW    // Row 1
+        &gpio1 PIN_8  GPIO_ACTIVE_LOW    // Row 2
+        &gpio1 PIN_9  GPIO_ACTIVE_LOW    // Row 3
+        &gpio1 PIN_10 GPIO_ACTIVE_LOW    // Row 4
+        &gpio1 PIN_11 GPIO_ACTIVE_LOW    // Row 5
+    >;
+
+    /* Время сканирования (оптимальные значения) */
+    poll-interval-ms = <10>;      // Интервал опроса в миллисекундах
+    debounce-period-ms = <10>;    // Период debounce в миллисекундах
+    debounce-release-period-ms = <10>; // Период debounce при отпускании
 };
