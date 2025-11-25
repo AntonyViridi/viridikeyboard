@@ -1,48 +1,39 @@
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/outputs.h>
-
-#define DEFAULT 0
-#define COMMON 1
-#define FIXRALT 2
-
 / {
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
+            label = "DEFAULT";
             bindings = <
-                &kp ESC     	        &kp F1 &kp F2 &kp F3 &kp F4    	            &kp F5 &kp F6 &kp F7 &kp F8                  &kp F9 &kp F10 &kp F11 &kp F12              &kp PSCRN       &kp SLCK           &kp PAUSE_BREAK
-                &kp GRAVE           &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS &kp EQUAL                           &kp BSPC             &kp INS         &kp HOME           &kp PG_UP
-				&kp TAB                 &kp Q &kp W &kp E &kp R &kp T &kp Y &kp U &kp I &kp O &kp P &kp LBKT &kp RBKT 	                                &kp BSLH		     &kp DEL         &kp END            &kp PG_DN
-				&lt COMMON LWIN             &kp A &kp S &kp D &kp F &kp G &kp H &kp J &kp K &kp L &kp SEMI &kp APOS                                     &kp ENTER
-				&kp LSHFT                       &kp Z &kp X &kp C &kp V &kp B &kp N &kp M &kp COMMA &kp DOT &kp FSLH                                    &kp RSHFT		                     &kp UP
-				&kp LCTRL       &kp LALT                                    &kp SPACE                                               &mo FIXRALT         &mt RCTRL K_APP     &kp LEFT         &kp DOWN           &kp RIGHT
-            >;          
-        };
+                /* Row 0 (строка 0) */
+                &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none
+                /* Row 1 (строка 1) */
+                &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none
+                /* Row 2 (строка 2) */
+                &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none
+                /* Row 3 (строка 3) */
+                &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none
+                /* Row 4 (строка 4) */
+                &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none
+                /* Row 5 (строка 5) */
+                &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none &none
+            >;
 
-        common_layer {
-            bindings = <
-                &kp ESC         	    &kp F1 &kp F2 &kp F3 &kp F4         	    &kp F5 &kp F6 &kp F7 &kp F8             	 &kp F9 &kp F10 &kp F11 &kp F12    	        &out OUT_TOG     &kp LC(LA(F11))    &kp LC(LA(F12))
-                &kp LC(LA(F1))      &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS &kp EQUAL           &kp LC(LA(BSPC))	&bootloader      &kp HOME           &bt BT_NXT
-				&none                   &kp LA(F4) &kp LG(W) &kp LG(E) &kp LG(R) &kp T &kp Y &kp LG(U) &kp LG(I) &kp O &kp LG(P) &kp LBKT &kp RBKT 	    &kp LC(LA(F10))		&bt BT_CLR       &kp END            &bt BT_PRV
-				&none                       &kp LG(A) &kp LG(S) &kp LG(D) &kp LC(LA(F)) &kp G &kp H &kp J &kp K &kp LG(L) &kp SEMI &kp APOS             &kp LC(LA(F9))
-				&kp LC(LA(F3))                  &kp LS(LG(S)) &kp LG(X) &kp LG(C) &kp LG(V) &kp B &kp N &kp M &kp C_PREV &kp C_NEXT &kp C_PLAY          &kp CAPS		                     &kp LG(UP)
-				&kp LC(LA(F4))   &kp LC(LA(F5))                             &kp LC(LA(F6))                                	        &kp LC(LA(F7))      &kp LC(LA(F8))      &kp LG(LEFT)     &kp LG(DOWN)       &kp LG(RIGHT)
-            >;          
+            /* Карта позиций для 16x6 матрицы */
+            keymap = <
+                /* Row 0 */
+                0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15
+                /* Row 1 */
+                16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31
+                /* Row 2 */
+                32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47
+                /* Row 3 */
+                48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63
+                /* Row 4 */
+                64  65  66  67  68  69  70  71  72  73  74  75  76  77  78  79
+                /* Row 5 */
+                80  81  82  83  84  85  86  87  88  89  90  91  92  93  94  95
+            >;
         };
-
-        fixralt_layer {
-            bindings = <
-                &kp ESC     	        &kp F1 &kp F2 &kp F3 &kp F4    	            &kp F5 &kp F6 &kp F7 &kp F8                  &kp F9 &kp F10 &kp F11 &kp F12              &kp PSCRN       &kp SLCK           &kp PAUSE_BREAK
-                &kp GRAVE           &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS &kp EQUAL                           &kp BSPC             &kp INS         &kp HOME           &kp PG_UP
-				&kp TAB                 &kp Q &kp W &kp E &kp R &kp T &kp Y &kp U &kp I &kp O &kp P &kp LBKT &kp RBKT 	                                &kp BSLH             &kp DEL         &kp END            &kp PG_DN
-				&kp CAPS                    &kp A &kp S &kp D &kp F &kp G &kp H &kp J &kp K &kp L &kp SEMI &kp APOS                                     &kp ENTER
-				&kp LSHFT                       &kp Z &kp X &kp C &kp V &kp B &kp N &kp M &kp COMMA &kp DOT &kp FSLH                                    &kp RSHFT		                     &kp UP
-				&kp LCTRL       &kp LALT                                    &kp SPACE                                               &none               &kp RCTRL            &kp RALT        &kp DOWN           &kp RIGHT
-            >;          
-        };
-
     };
 };
